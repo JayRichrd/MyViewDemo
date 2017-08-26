@@ -34,6 +34,29 @@ public class CirlcleView extends View {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        // 先获取四个参数
+        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+        if (widthSpecMode == MeasureSpec.AT_MOST && heightSpecMode == MeasureSpec.AT_MOST)
+            // layout_width和layout_height都设置为wrap_content
+            // 为了使得自定义的wrap_content生效，这里给layout_width和layout_height一个默认值200
+            setMeasuredDimension(200, 200);
+        else if (widthSpecMode == MeasureSpec.AT_MOST)
+            // layout_width设置为wrap_content
+            // 为了使得自定义的wrap_content生效，这里给layout_width一个默认值200
+            setMeasuredDimension(200, heightSpecSize);
+        else if (heightSpecMode == MeasureSpec.AT_MOST)
+            // layout_height设置为wrap_content
+            // 为了使得自定义的wrap_content生效，这里给layout_height一个默认值200
+            setMeasuredDimension(widthSpecSize, 200);
+
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         // 获取尺寸
