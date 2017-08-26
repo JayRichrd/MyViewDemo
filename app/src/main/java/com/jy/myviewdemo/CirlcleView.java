@@ -59,12 +59,17 @@ public class CirlcleView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        // 获取尺寸
-        int width = getWidth();
-        int height = getHeight();
+        // 获取padding
+        final int paddingLeft = getPaddingLeft();
+        final int paddingRight = getPaddingLeft();
+        final int paddingTop = getPaddingLeft();
+        final int paddingBottom = getPaddingLeft();
+        // 获取尺寸，并去除padding的部分
+        int width = getWidth() - paddingLeft - paddingRight;
+        int height = getHeight() - paddingTop - paddingBottom;
         // 将最小者作为直径，进而求得半径
         int radius = Math.min(width, height) >> 1;
-        // 画圆
-        canvas.drawCircle(width >> 1, height >> 1, radius, mPaint);
+        // 画圆，将圆心移动在x、y轴上都移动padding的距离
+        canvas.drawCircle((width >> 1) + paddingLeft, (height >> 1) + paddingTop, radius, mPaint);
     }
 }
