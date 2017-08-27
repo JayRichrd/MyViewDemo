@@ -1,6 +1,7 @@
 package com.jy.myviewdemo;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -26,6 +27,11 @@ public class CirlcleView extends View {
     public CirlcleView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
+        // 加载自定义的属性集合
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CirlcleView);
+        // 解析属性
+        mColor = typedArray.getColor(R.styleable.CirlcleView_circle_color, Color.RED);
+        typedArray.recycle();
         init();
     }
 
